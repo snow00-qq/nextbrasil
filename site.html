@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Next - Sua solução completa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #ffffff; color: #333; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-start;
+    }
+    header {
+      background: #ff0000; color: #fff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 3px 8px rgba(255, 255, 255, 0.2); position: sticky; top: 0; z-index: 100;
+    }
+    header .logo {
+      font-size: 28px; font-weight: 700; letter-spacing: 2px; cursor: pointer; user-select: none;
+    }
+    nav {
+      display: flex; gap: 25px;
+    }
+    nav a {
+      color: #000000dd; text-decoration: none; font-weight: 500; font-size: 16px;
+      position: relative; transition: color 0.3s ease; padding: 8px 0; user-select: none;
+    }
+    nav a:hover,
+    nav a.active {
+      color: #ffffff;
+    }
+    nav a.active::after {
+      content: ''; position: absolute; bottom: -6px; left: 0; width: 100%; height: 3px;
+      background: #ff0000; border-radius: 2px;
+    }
+    .container {
+      max-width: 1000px; width: 90%; margin: 40px auto 80px;
+    }
+    .tab-content {
+      display: none;
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+      transition: opacity 0.4s ease;
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgb(13 37 63 / 0.1);
+      text-align: center;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      height: auto;
+    }
+    #home {
+      background: linear-gradient(135deg, #ff0000 0%, #ffffff 100%);
+      color: white; box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+      padding: 60px 40px; border-radius: 12px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 30px;
+    }
+    #home h2 {
+      font-size: 3.8rem; font-weight: 800; text-shadow: 0 3px 8px rgba(0,0,0,0.35);
+      max-width: 700px; line-height: 1.1; user-select: none;
+    }
+    #home p {
+      font-size: 1.4rem; max-width: 680px; line-height: 1.5; font-weight: 500;
+      text-shadow: 0 1px 5px rgba(0,0,0,0.25); user-select: none;
+    }
+    .home-benefits {
+      display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
+      max-width: 720px; margin-top: 40px;
+    }
+    .benefit-item {
+      display: flex; flex-direction: column; align-items: center;
+      max-width: 180px; user-select: none; transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .benefit-item:hover {
+      transform: translateY(-6px);
+    }
+    .benefit-item i {
+      font-size: 3.6rem; margin-bottom: 12px;
+      color: #ffffff; text-shadow: 0 2px 6px rgba(255, 0, 0, 0.6);
+      transition: color 0.3s ease;
+    }
+    .benefit-item:hover i {
+      color: #ffffff;
+    }
+    .benefit-item span {
+      font-weight: 600; font-size: 1.1rem; color: #ffffffcc; text-align: center;
+    }
+    .btn-primary {
+      background-color: #ff0000; color: white; border: none; border-radius: 30px;
+      padding: 15px 45px; font-size: 1.25rem; font-weight: 700; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease; user-select: none;
+      margin-top: 45px;
+    }
+    .btn-primary:hover {
+      background-color: #ff0000; box-shadow: 0 10px 35px rgba(0,199,247,0.8);
+    }
+    #sobre {
+      max-width: 900px; margin: 40px auto 0;
+      color: #e4e4e4;
+      text-align: center;
+    }
+    #sobre h2 {
+      font-weight: 700; font-size: 2.6rem; margin-bottom: 30px;
+      color: #ff0000; letter-spacing: 1px;
+    }
+    #sobre p {
+      font-size: 1.15rem; line-height: 1.8; margin-bottom: 40px; max-width: 800px;
+      margin-left: auto; margin-right: auto;
+    }
+    .sobre-cards {
+      display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;
+    }
+    .sobre-card {
+      background: #626060; border-radius: 20px; box-shadow: 0 6px 18px rgba(0,123,189,0.15);
+      padding: 30px 25px; max-width: 280px; text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;
+      user-select: none;
+    }
+    .sobre-card:hover {
+      transform: translateY(-8px); box-shadow: 0 14px 40px rgba(255, 0, 0, 0.35);
+    }
+    .sobre-card i {
+      font-size: 3.8rem; color: #ff0000; margin-bottom: 18px; transition: color 0.3s ease;
+    }
+    .sobre-card:hover i {
+      color: #ffffff;
+    }
+    .sobre-card h3 {
+      font-size: 1.5rem; color: #ff0000; margin-bottom: 14px; font-weight: 700;
+    }
+    .sobre-card p {
+      font-size: 1rem; color: #ffffffdd; line-height: 1.5;
+    }
+    .contato-canais {
+      max-width: 600px; margin: 60px auto 0;
+      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+      text-align: center;
+    }
+    .contato-card {
+      background: #ffffff; border-radius: 18px; box-shadow: 0 6px 22px rgba(255, 0, 0, 0.12);
+      width: 260px; padding: 35px 25px;
+      display: flex; flex-direction: column; align-items: center;
+      transition: all 0.3s ease; cursor: pointer; user-select: none;
+      text-decoration: none; color: #000000;
+      text-align: center;
+    }
+    .contato-card:hover {
+      box-shadow: 0 12px 35px rgb(255, 0, 0);
+      transform: translateY(-8px); color: #ff0000;
+    }
+    .contato-card i {
+      font-size: 4.8rem; margin-bottom: 20px; transition: color 0.3s ease;
+    }
+    .contato-card:hover i {
+      color: #ff0000;
+    }
+    .contato-card span {
+      font-weight: 700; font-size: 1.6rem; user-select: none;
+    }
+    footer {
+      background: #ff0000; color: #ccc; padding: 25px 20px;
+      text-align: center; font-size: 0.9rem; user-select: none;
+      box-shadow: inset 0 2px 6px rgba(255 255 255 / 0.05);
+    }
+    footer a {
+      color: #ff0000; text-decoration: none; margin: 0 8px; transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #ff0000; text-decoration: underline;
+    }
+    @media(max-width: 900px) {
+      .sobre-cards {
+        flex-direction: column; gap: 30px; align-items: center;
+      }
+      #sobre p {
+        font-size: 1rem; max-width: 100%;
+      }
+    }
+    @media(max-width: 700px) {
+      header {
+        flex-direction: column; gap: 12px; padding: 20px;
+      }
+      nav {
+        gap: 15px; flex-wrap: wrap; justify-content: center;
+      }
+      nav a {
+        font-size: 14px;
+      }
+      #home h2 {
+        font-size: 2.6rem;
+      }
+      #home p {
+        font-size: 1.1rem;
+      }
+      #home {
+        padding: 40px 25px;
+      }
+      #sobre {
+        padding: 0 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo" onclick="showTab('home')" tabindex="0" role="button" aria-label="Ir para Início" style="cursor:pointer;">
+      <img src="logo.png" alt="Logo Next" style="height:40px;" />
+    </div>
+    <nav role="navigation" aria-label="Menu principal">
+      <a href="#" class="active" onclick="navClick(event, 'home')" tabindex="0" aria-current="page">Início</a>
+      <a href="#" onclick="navClick(event, 'sobre')" tabindex="0">Sobre</a>
+      <a href="#" onclick="navClick(event, 'contato')" tabindex="0">Contato</a>
+    </nav>
+  </header>
+
+  <main class="container" role="main">
+    <section id="home" class="tab-content active" tabindex="0" aria-label="Página Início">
+      <h2>Bem-vindo a Next, Sua solução completa para Discord, FiveM e otimização de PCs!</h2>
+      <p>Na Next, você encontra tudo que precisa para turbinar seus servidores, sua gameplay e o desempenho do seu computador, com produtos e serviços de alta qualidade e suporte dedicado.</p>
+      <div class="home-benefits" role="list" aria-label="Produtos e serviços">
+        <div class="benefit-item" role="listitem" tabindex="0" aria-label="Bots profissionais para Discord">
+          <i class="fas fa-robot"></i>
+          <span>Bots profissionais para Discord</span>
+        </div>
+        <div class="benefit-item" role="listitem" tabindex="0" aria-label="Mapas para cidade de FiveM">
+          <i class="fas fa-map"></i>
+          <span>Mapas para cidade de FiveM</span>
+        </div>
+        <div class="benefit-item" role="listitem" tabindex="0" aria-label="Skins de FiveM">
+          <i class="fas fa-palette"></i>
+          <span>Skins de FiveM</span>
+        </div>
+        <div class="benefit-item" role="listitem" tabindex="0" aria-label="Carros de FiveM">
+          <i class="fas fa-car"></i>
+          <span>Carros de FiveM</span>
+        </div>
+        <div class="benefit-item" role="listitem" tabindex="0" aria-label="Otimização de computadores">
+          <i class="fas fa-desktop"></i>
+          <span>Otimização de computadores</span>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="window.open('https://discord.gg/fFpxKdZ3Zd', '_blank')">Saiba Mais</button>
+    </section>
+
+    <section id="sobre" class="tab-content" tabindex="0" aria-label="Página Sobre" aria-hidden="true">
+      <h2>Sobre Nós</h2>
+      <p>Desenvolvemos soluções web modernas, focadas em performance, segurança e experiência do usuário. Com designs elegantes, ajudamos empresas e criadores a se destacarem no mundo digital.</p>
+      <div class="sobre-cards" role="list" aria-label="Nossos diferenciais">
+        <article class="sobre-card" role="listitem">
+          <i class="fas fa-bolt"></i>
+          <h3>Performance</h3>
+          <p>Aplicações rápidas e otimizadas que proporcionam a melhor experiência ao usuário.</p>
+        </article>
+        <article class="sobre-card" role="listitem">
+          <i class="fas fa-lock"></i>
+          <h3>Segurança</h3>
+          <p>Proteção avançada para seus dados e sistemas contra ameaças e ataques.</p>
+        </article>
+        <article class="sobre-card" role="listitem">
+          <i class="fas fa-user-friends"></i>
+          <h3>Experiência</h3>
+          <p>Design intuitivo e interfaces que facilitam o uso, garantindo satisfação.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contato" class="tab-content" tabindex="0" aria-label="Página Contato" aria-hidden="true">
+      <div class="contato-canais" aria-label="Canais de suporte">
+        <a href="https://instagram.com/nextstorebrasil" target="_blank" rel="noopener noreferrer" class="contato-card" aria-label="Instagram suporte">
+          <i class="fab fa-instagram" style="color:#ff0000;"></i>
+          <span>Instagram</span>
+        </a>
+        <a href="https://discord.gg/fFpxKdZ3Zd" target="_blank" rel="noopener noreferrer" class="contato-card" aria-label="Discord suporte">
+          <i class="fab fa-discord" style="color:#ff0000;"></i>
+          <span>Discord</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Next. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    function showTab(tabId) {
+      const tabs = ['home', 'sobre', 'contato'];
+      tabs.forEach(id => {
+        const el = document.getElementById(id);
+        if (id === tabId) {
+          el.classList.add('active');
+          el.setAttribute('aria-hidden', 'false');
+        } else {
+          el.classList.remove('active');
+          el.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      document.querySelectorAll('nav a').forEach(a => {
+        if (a.textContent.toLowerCase() === tabId) {
+          a.classList.add('active');
+          a.setAttribute('aria-current', 'page');
+        } else {
+          a.classList.remove('active');
+          a.removeAttribute('aria-current');
+        }
+      });
+    }
+    function navClick(event, tabId) {
+      event.preventDefault();
+      showTab(tabId);
+    }
+  </script>
+</body>
+</html>
