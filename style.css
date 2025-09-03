@@ -17,7 +17,7 @@ body {
 
 /* Header */
 header {
-  background: #ff0000;
+  background: #00ff1a;
   color: #fff;
   padding: 15px 40px;
   display: flex;
@@ -100,7 +100,7 @@ nav a.active::after {
 
 /* Home */
 #home {
-  background: linear-gradient(135deg, #ff0000 0%, #ff4d4d 100%);
+  background: linear-gradient(135deg, #00ff1a 0%, #4dff4d 100%);
   color: #fff;
   padding: 60px 40px;
   border-radius: 12px;
@@ -167,8 +167,8 @@ nav a.active::after {
 /* Botão principal */
 .btn-primary {
   background-color: #ffffff;
-  color: #ff0000;
-  border: 2px solid #ff0000;
+  color: #00ff1a;
+  border: 2px solid #00ff1a;
   border-radius: 30px;
   padding: 15px 45px;
   font-size: 1.25rem;
@@ -179,9 +179,9 @@ nav a.active::after {
 }
 
 .btn-primary:hover {
-  background-color: #ff0000;
+  background-color: #00ff1a;
   color: #ffffff;
-  box-shadow: 0 10px 35px rgba(255, 0, 0, 0.6);
+  box-shadow: 0 10px 35px rgba(0, 255, 26, 0.6);
 }
 
 /* Sobre */
@@ -189,7 +189,7 @@ nav a.active::after {
   font-weight: 700;
   font-size: 2.6rem;
   margin-bottom: 30px;
-  color: #ff0000;
+  color: #00ff1a;
 }
 
 #sobre p {
@@ -218,12 +218,12 @@ nav a.active::after {
 
 .sobre-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 14px 40px rgba(255, 0, 0, 0.35);
+  box-shadow: 0 14px 40px rgba(0, 255, 26, 0.35);
 }
 
 .sobre-card i {
   font-size: 3.8rem;
-  color: #ff0000;
+  color: #00ff1a;
   margin-bottom: 18px;
   transition: color 0.3s ease;
 }
@@ -234,7 +234,7 @@ nav a.active::after {
 
 .sobre-card h3 {
   font-size: 1.5rem;
-  color: #ff0000;
+  color: #00ff1a;
   margin-bottom: 14px;
 }
 
@@ -258,7 +258,7 @@ nav a.active::after {
 .contato-card {
   background: #ffffff;
   border-radius: 18px;
-  box-shadow: 0 6px 22px rgba(255, 0, 0, 0.12);
+  box-shadow: 0 6px 22px rgba(0, 255, 26, 0.12);
   width: 260px;
   padding: 35px 25px;
   display: flex;
@@ -270,9 +270,9 @@ nav a.active::after {
 }
 
 .contato-card:hover {
-  box-shadow: 0 12px 35px rgba(255, 0, 0, 0.4);
+  box-shadow: 0 12px 35px rgba(0, 255, 26, 0.4);
   transform: translateY(-8px);
-  color: #ff0000;
+  color: #00ff1a;
 }
 
 .contato-card i {
@@ -282,7 +282,7 @@ nav a.active::after {
 }
 
 .contato-card:hover i {
-  color: #ff0000;
+  color: #00ff1a;
 }
 
 .contato-card span {
@@ -292,7 +292,7 @@ nav a.active::after {
 
 /* Footer */
 footer {
-  background: #ff0000;
+  background: #00ff1a;
   color: #fff;
   padding: 25px 20px;
   text-align: center;
@@ -349,3 +349,4 @@ footer a:hover {
     padding: 0 15px;
   }
 }
+
