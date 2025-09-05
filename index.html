@@ -1,427 +1,144 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Next - Sua solução completa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Surpresa Especial 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap" rel="stylesheet">
   <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+    :root{
+      --bg:#fff5fb;
+      --card:#fff;
+      --accent:#ff4e91;
+      --accent-2:#ff9cc2;
+      --text:#36273a;
+      --muted:#7b6b78;
     }
-    body {
-      background: #ffffff;
-      color: #333;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;
+      display:flex;align-items:center;justify-content:center;
+      background: radial-gradient(circle at 20% 20%, #ffe6f0 0%, var(--bg) 60%);
+      font-family:'Nunito',sans-serif;
+      color:var(--text);
+      padding:20px;
+    }
+    .card{
+      width:100%;max-width:750px;background:var(--card);
+      border-radius:26px;box-shadow:0 12px 40px rgba(255,100,160,0.2);
+      padding:32px;position:relative;overflow:hidden;
+      transition:transform .25s ease;
+    }
+    .card:hover{transform:translateY(-6px)}
+
+    header{text-align:center}
+    header h1{font-size:28px;color:var(--accent);margin-bottom:6px}
+    header p{color:var(--muted);font-size:16px}
+
+    .message{
+      margin-top:24px;padding:22px;border-radius:14px;background:linear-gradient(180deg, rgba(255,250,253,1), rgba(255,244,249,1));
+      border:1px solid rgba(255,150,190,0.15);text-align:center;
     }
 
-    /* Header */
-    header {
-      background: #00ff1a;
-      color: #fff;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    }
-    header .logo {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-    header img {
-      height: 40px;
-    }
-    nav {
-      display: flex;
-      gap: 25px;
-      flex-wrap: wrap;
-    }
-    nav a {
-      color: #ffffffcc;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 16px;
-      position: relative;
-      transition: all 0.3s ease;
-      padding: 8px 0;
-    }
-    nav a:hover,
-    nav a.active {
-      color: #ffffff;
-    }
-    nav a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: #ffffff;
-      border-radius: 2px;
+    .typewriter{font-weight:700;font-size:20px;line-height:1.5;min-height:60px;color:var(--text)}
+
+    .controls{margin-top:20px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+    .btn{padding:12px 18px;border-radius:14px;border:0;cursor:pointer;font-weight:700;font-size:15px;transition:all .25s}
+    .btn--primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;box-shadow:0 6px 14px rgba(255,80,140,0.25)}
+    .btn--primary:hover{opacity:0.9}
+    .btn--ghost{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+    .btn--ghost:hover{background:var(--accent);color:white}
+
+    .poem{margin-top:20px;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,245,249,1), rgba(255,250,252,1));border:1px dashed rgba(255,140,180,0.3);display:none;font-size:16px;line-height:1.6;color:var(--text)}
+
+    footer{margin-top:24px;text-align:center;font-size:13px;color:var(--muted)}
+
+    /* coração animado */
+    .heart{position:absolute;width:20px;height:20px;background:var(--accent);transform:rotate(-45deg);animation:float 4s linear forwards;border-radius:3px;opacity:0.8}
+    .heart:before,.heart:after{content:'';position:absolute;width:20px;height:20px;background:var(--accent);border-radius:50%}
+    .heart:before{top:-10px;left:0}
+    .heart:after{left:10px;top:0}
+
+    @keyframes float{
+      0%{transform:translateY(0) scale(1) rotate(-45deg);opacity:0.8}
+      100%{transform:translateY(-160px) scale(1.4) rotate(-45deg);opacity:0}
     }
 
-    /* Container */
-    .container {
-      max-width: 1000px;
-      width: 90%;
-      margin: 40px auto 80px;
-    }
-
-    /* Tabs */
-    .tab-content {
-      display: none;
-      opacity: 0;
-      height: 0;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      background: white;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(13,37,63,0.1);
-      text-align: center;
-    }
-    .tab-content.active {
-      display: block;
-      opacity: 1;
-      height: auto;
-    }
-
-    /* Home */
-    #home {
-      background: linear-gradient(135deg, #00ff1a 0%, #4dff4d 100%);
-      color: white;
-      padding: 60px 40px;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-    }
-    #home h2 {
-      font-size: 3rem;
-      font-weight: 800;
-      text-align: center;
-      text-shadow: 0 3px 8px rgba(0,0,0,0.35);
-      max-width: 700px;
-      line-height: 1.2;
-    }
-    #home p {
-      font-size: 1.2rem;
-      max-width: 680px;
-      line-height: 1.5;
-      font-weight: 500;
-      text-align: center;
-      text-shadow: 0 1px 5px rgba(0,0,0,0.25);
-    }
-
-    /* Benefícios */
-    .home-benefits {
-      display: flex;
-      gap: 40px;
-      justify-content: center;
-      flex-wrap: wrap;
-      max-width: 720px;
-      margin-top: 40px;
-    }
-    .benefit-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 180px;
-      cursor: default;
-      transition: transform 0.3s ease;
-    }
-    .benefit-item:hover {
-      transform: translateY(-6px);
-    }
-    .benefit-item i {
-      font-size: 3rem;
-      margin-bottom: 12px;
-      color: #fff;
-      text-shadow: 0 2px 6px rgba(0, 255, 26, 0.6);
-      transition: color 0.3s ease;
-    }
-    .benefit-item span {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #ffffffcc;
-      text-align: center;
-    }
-
-    /* Botão */
-    .btn-primary {
-      background-color: #ffffff;
-      color: #00ff1a;
-      border: 2px solid #00ff1a;
-      border-radius: 30px;
-      padding: 15px 45px;
-      font-size: 1.25rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 45px;
-    }
-    .btn-primary:hover {
-      background-color: #00ff1a;
-      color: #ffffff;
-      box-shadow: 0 10px 35px rgba(0,255,26,0.6);
-    }
-
-    /* Sobre */
-    #sobre {
-      max-width: 900px;
-      margin: 40px auto 0;
-      text-align: center;
-      color: #e4e4e4;
-    }
-    #sobre h2 {
-      font-size: 2.2rem;
-      color: #00ff1a;
-      margin-bottom: 30px;
-    }
-    #sobre p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 40px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .sobre-cards {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-    .sobre-card {
-      background: #626060;
-      border-radius: 20px;
-      padding: 30px 25px;
-      max-width: 280px;
-      text-align: center;
-      cursor: default;
-      transition: all 0.3s ease;
-    }
-    .sobre-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 14px 40px rgba(0,255,26,0.35);
-    }
-    .sobre-card i {
-      font-size: 3rem;
-      color: #00ff1a;
-      margin-bottom: 18px;
-      transition: color 0.3s ease;
-    }
-    .sobre-card:hover i {
-      color: #ffffff;
-    }
-    .sobre-card h3 {
-      font-size: 1.4rem;
-      color: #00ff1a;
-      margin-bottom: 12px;
-    }
-    .sobre-card p {
-      font-size: 1rem;
-      color: #ffffffdd;
-      line-height: 1.5;
-    }
-
-    /* Contato */
-    .contato-canais {
-      max-width: 600px;
-      margin: 60px auto 0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 40px;
-      text-align: center;
-    }
-    .contato-card {
-      background: #ffffff;
-      border-radius: 18px;
-      width: 260px;
-      padding: 35px 25px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: #000;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .contato-card:hover {
-      box-shadow: 0 12px 35px rgba(0,255,26,0.4);
-      transform: translateY(-8px);
-      color: #00ff1a;
-    }
-    .contato-card i {
-      font-size: 4.5rem;
-      margin-bottom: 20px;
-      transition: color 0.3s ease;
-    }
-    .contato-card:hover i {
-      color: #00ff1a;
-    }
-    .contato-card span {
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-
-    /* Footer */
-    footer {
-      background: #00ff1a;
-      color: #fff;
-      padding: 25px 20px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    /* Responsivo */
-    @media(max-width: 900px){
-      .sobre-cards {
-        flex-direction: column;
-        align-items: center;
-      }
-      #sobre p {
-        font-size: 1rem;
-      }
-    }
-    @media(max-width: 700px){
-      header {
-        flex-direction: column;
-        gap: 12px;
-        padding: 20px;
-      }
-      nav a {
-        font-size: 14px;
-      }
-      #home h2 {
-        font-size: 2rem;
-      }
-      #home p {
-        font-size: 1rem;
-      }
-      #home {
-        padding: 40px 25px;
-      }
-      #sobre {
-        padding: 0 15px;
-      }
+    @media(max-width:540px){
+      .card{padding:20px}
+      header h1{font-size:22px}
+      .typewriter{font-size:18px}
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo" onclick="showTab('home')" tabindex="0" role="button" aria-label="Ir para Início">
-      <img src="logo.png" alt="Logo Next" />
+  <div class="card">
+    <header>
+      <h1>💌 Uma surpresa para você 💌</h1>
+      <p>Clique e descubra o quanto você é especial ✨</p>
+    </header>
+
+    <div class="message">
+      <div class="typewriter" id="typewriter"></div>
+
+      <div class="controls">
+        <button class="btn btn--primary" id="reveal">Revelar mensagem</button>
+        <button class="btn btn--ghost" id="cute">Frase fofa</button>
+      </div>
+
+      <div class="poem" id="poem">
+        <strong>Um poema só pra você:</strong>
+        <p id="poemText">Você é como o sol em dia nublado: chega e tudo fica iluminado. ☀️</p>
+      </div>
     </div>
-    <nav role="navigation" aria-label="Menu principal">
-      <a href="#" class="active" onclick="navClick(event, 'home')" aria-current="page">Início</a>
-      <a href="#" onclick="navClick(event, 'sobre')">Sobre</a>
-      <a href="#" onclick="navClick(event, 'contato')">Contato</a>
-    </nav>
-  </header>
 
-  <main class="container">
-    <section id="home" class="tab-content active">
-      <h2>Bem-vindo a Next, Sua solução completa para Discord, FiveM e otimização de PCs!</h2>
-      <p>Na Next, você encontra tudo que precisa para turbinar seus servidores, sua gameplay e o desempenho do seu computador, com produtos e serviços de alta qualidade e suporte dedicado.</p>
-      <div class="home-benefits">
-        <div class="benefit-item">
-          <i class="fas fa-robot"></i>
-          <span>Bots profissionais para Discord</span>
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-map"></i>
-          <span>Mapas para cidade de FiveM</span>
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-palette"></i>
-          <span>Skins de FiveM</span>
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-car"></i>
-          <span>Carros de FiveM</span>
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-desktop"></i>
-          <span>Otimização de computadores</span>
-        </div>
-      </div>
-      <button class="btn-primary" onclick="window.open('https://discord.gg/fFpxKdZ3Zd','_blank')">Saiba Mais</button>
-    </section>
-
-    <section id="sobre" class="tab-content">
-      <h2>Sobre Nós</h2>
-      <p>Desenvolvemos soluções web modernas, focadas em performance, segurança e experiência do usuário. Com designs elegantes, ajudamos empresas e criadores a se destacarem no mundo digital.</p>
-      <div class="sobre-cards">
-        <article class="sobre-card">
-          <i class="fas fa-bolt"></i>
-          <h3>Performance</h3>
-          <p>Aplicações rápidas e otimizadas que proporcionam a melhor experiência ao usuário.</p>
-        </article>
-        <article class="sobre-card">
-          <i class="fas fa-lock"></i>
-          <h3>Segurança</h3>
-          <p>Proteção avançada para seus dados e sistemas contra ameaças e ataques.</p>
-        </article>
-        <article class="sobre-card">
-          <i class="fas fa-user-friends"></i>
-          <h3>Experiência</h3>
-          <p>Design intuitivo e interfaces que facilitam o uso, garantindo satisfação.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="contato" class="tab-content">
-      <div class="contato-canais">
-        <a href="https://instagram.com/nextstorebrasil" target="_blank" class="contato-card">
-          <i class="fab fa-instagram" style="color:#ff0000;"></i>
-          <span>Instagram</span>
-        </a>
-        <a href="https://discord.gg/fFpxKdZ3Zd" target="_blank" class="contato-card">
-          <i class="fab fa-discord" style="color:#ff0000;"></i>
-          <span>Discord</span>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Next. Todos os direitos reservados.</p>
-  </footer>
+    <footer>Duda amor da minha vida 💖</footer>
+  </div>
 
   <script>
-    function showTab(tabId){
-      const tabs = ['home','sobre','contato'];
-      tabs.forEach(id=>{
-        const el=document.getElementById(id);
-        if(id===tabId){
-          el.classList.add('active');
-        } else {
-          el.classList.remove('active');
-        }
-      });
-      document.querySelectorAll('nav a').forEach(a=>{
-        a.classList.toggle('active', a.textContent.toLowerCase()===tabId);
+    const frases = [
+      'Seu sorriso é meu lugar favorito.',
+      'Com você, até o silêncio é aconchegante.',
+      'Se eu pudesse escolher, escolheria você mil vezes.',
+      'Você transforma o simples em inesquecível.',
+      'Se fosse música, seria a minha preferida.'
+    ];
+
+    const typeEl = document.getElementById('typewriter');
+    function typeText(text, speed=40){
+      typeEl.textContent='';
+      let i=0;
+      return new Promise(res=>{
+        const t=setInterval(()=>{
+          typeEl.textContent+=text.charAt(i);
+          i++;
+          if(i>=text.length){clearInterval(t);res();}
+        },speed);
       });
     }
-    function navClick(e,tabId){
-      e.preventDefault();
-      showTab(tabId);
+
+    document.getElementById('reveal').addEventListener('click', async()=>{
+      const texto='Desde que você entrou na minha vida, até os dias comuns ficaram especiais.';
+      await typeText(texto,30);
+      document.getElementById('poem').style.display='block';
+      spawnHearts(8);
+    });
+
+    document.getElementById('cute').addEventListener('click',()=>{
+      const f=frases[Math.floor(Math.random()*frases.length)];
+      typeText(f,30);
+      spawnHearts(5);
+    });
+
+    function spawnHearts(n=4){
+      for(let i=0;i<n;i++){
+        const h=document.createElement('div');
+        h.className='heart';
+        h.style.left=Math.random()*90+'%';
+        h.style.bottom='-20px';
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),4000);
+      }
     }
   </script>
 </body>
